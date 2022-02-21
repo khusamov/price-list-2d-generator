@@ -11,7 +11,7 @@ export default function renderTree(nodes: INode) {
 	return (
 		<TreeItem key={id} {...treeItemProps}>
 			{
-				Array.isArray(nodes.children)
+				'children' in nodes
 					? nodes.children.map(renderTree)
 					: null
 			}
