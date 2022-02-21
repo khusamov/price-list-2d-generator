@@ -3,10 +3,10 @@ import TreeItem from '@mui/lab/TreeItem';
 import {TreeItemProps} from '@mui/lab/TreeItem/TreeItem';
 
 export default function renderTree(node: INode) {
-	const {id, name} = node;
+	const {id, label} = node;
 	const treeItemProps: TreeItemProps = {
 		nodeId: id,
-		label: name
+		label: label
 	}
 	return (
 		<TreeItem key={id} {...treeItemProps}>

@@ -2,23 +2,23 @@ import INode from './INode';
 
 export const data: INode = {
 	id: 'root',
-	name: 'Услуги',
+	label: 'Услуги',
 	children: [
 		{
 			id: '1',
-			name: 'Настройка базы данных',
+			label: 'Настройка базы данных',
 		},
 		{
 			id: '3',
-			name: 'Профиль ПФХ',
+			label: 'Профиль ПФХ',
 			children: [
 				{
 					id: '4',
-					name: 'Настройка фурнитуры',
+					label: 'Настройка фурнитуры',
 				},
 				{
 					id: '5',
-					name: 'Настройка профиля',
+					label: 'Настройка профиля',
 				},
 			],
 		},

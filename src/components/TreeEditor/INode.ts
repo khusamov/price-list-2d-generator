@@ -1,5 +1,5 @@
 export default interface INode {
 	id: string;
-	name: string;
+	label: string;
 	children?: readonly INode[];
 }
