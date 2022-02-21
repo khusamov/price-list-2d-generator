@@ -2,8 +2,8 @@ import INode from './INode';
 import TreeItem from '@mui/lab/TreeItem';
 import {TreeItemProps} from '@mui/lab/TreeItem/TreeItem';
 
-export default function renderTree(nodes: INode) {
-	const {id, name} = nodes;
+export default function renderTree(node: INode) {
+	const {id, name} = node;
 	const treeItemProps: TreeItemProps = {
 		nodeId: id,
 		label: name
@@ -11,8 +11,8 @@ export default function renderTree(nodes: INode) {
 	return (
 		<TreeItem key={id} {...treeItemProps}>
 			{
-				'children' in nodes
-					? nodes.children.map(renderTree)
+				'children' in node
+					? node.children.map(renderTree)
 					: null
 			}
 		</TreeItem>
