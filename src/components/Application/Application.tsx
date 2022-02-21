@@ -1,6 +1,6 @@
 import {SyntheticEvent, useState} from 'react';
 import {Helmet} from 'react-helmet';
-import {Box, CssBaseline, GlobalStyles} from '@mui/material';
+import {Box, CssBaseline, GlobalStyles, Grid, Typography} from '@mui/material';
 import generateDataSample from '../../samples/tree-data/generateDataSample';
 import getAllNodes from '../../functions/getAllNodes';
 import ApplicationBar from '../ApplicationBar';
@@ -16,18 +16,29 @@ export default function Application() {
 		setExpandedNodeIds(nodeIds)
 	}
 	return (
-		<Box sx={{flexGrow: 1}}>
+		<Box sx={{height: '100%', flexGrow: 1}}>
 			<CssBaseline/>
 			<GlobalStyles styles={styles}/>
 			<Helmet defaultTitle={siteTitle}/>
-			<ApplicationBar/>
-			<Box sx={{padding: 2}}>
-				<TreeEditor
-					data={data}
-					expanded={expandedNodeIds}
-					onNodeToggle={onNodeToggle}
-				/>
-			</Box>
+			<Grid container direction='column' wrap='nowrap' sx={{height: '100%'}}>
+				<Grid item>
+					<ApplicationBar/>
+				</Grid>
+				<Grid item container sx={{flexGrow: 1, overflow: 'auto'}}>
+					<Box sx={{flexGrow: 1}}>
+						<TreeEditor
+							data={data}
+							expanded={expandedNodeIds}
+							onNodeToggle={onNodeToggle}
+						/>
+					</Box>
+				</Grid>
+				<Grid item sx={{backgroundColor: 'gray'}}>
+					<Typography sx={{textAlign: 'center', padding: 1, color: 'white'}}>
+						Павловский Посад, 2022 год
+					</Typography>
+				</Grid>
+			</Grid>
 		</Box>
 	)
 }
