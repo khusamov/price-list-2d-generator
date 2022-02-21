@@ -3,6 +3,7 @@ import ApplicationBar from '../ApplicationBar';
 import TreeEditor from '../TreeEditor';
 import {styles} from './globalStyles';
 import {Helmet} from 'react-helmet';
+import generateDataSample from '../../samples/tree-data/generateDataSample';
 
 const siteTitle = 'Генератор прайс-листов'
 
@@ -14,7 +15,7 @@ export default function Application() {
 			<Helmet defaultTitle={siteTitle}/>
 			<ApplicationBar/>
 			<Box sx={{padding: 2}}>
-				<TreeEditor/>
+				<TreeEditor data={generateDataSample()}/>
 			</Box>
 		</Box>
 	)

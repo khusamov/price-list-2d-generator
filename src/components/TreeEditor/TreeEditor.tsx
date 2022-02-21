@@ -2,9 +2,13 @@ import TreeView, {TreeViewProps} from '@mui/lab/TreeView'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import renderTree from './renderTree';
-import {data} from './data';
+import INode from './INode';
 
-export default function TreeEditor() {
+interface ITreeEditor {
+	data: INode
+}
+
+export default function TreeEditor({data}: ITreeEditor) {
 	const treeViewProps: TreeViewProps = {
 		defaultCollapseIcon: <ExpandMoreIcon/>,
 		defaultExpandIcon: <ChevronRightIcon/>,

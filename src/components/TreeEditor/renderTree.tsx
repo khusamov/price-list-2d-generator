@@ -6,7 +6,7 @@ export default function renderTree(node: INode) {
 	const {id, label} = node;
 	const treeItemProps: TreeItemProps = {
 		nodeId: id,
-		label: label
+		label: `${id}: ${label}`
 	}
 	return (
 		<TreeItem key={id} {...treeItemProps}>
