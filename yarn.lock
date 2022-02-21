@@ -2498,6 +2498,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mobx@npm:^6.4.1":
+  version: 6.4.1
+  resolution: "mobx@npm:6.4.1"
+  checksum: 97412485e716dd286fe41645c26d99b09d403b60fdade5757d26e18c2e1a723da2afc9b7d0f7161457be812075a90839d998c9bf6af88f01cd92dbab16a484c3
+  languageName: node
+  linkType: hard
+
 "ms@npm:2.1.2":
   version: 2.1.2
   resolution: "ms@npm:2.1.2"
@@ -3131,6 +3138,7 @@ __metadata:
     "@types/react": ^17.0.39
     "@types/react-dom": ^17.0.11
     "@types/react-helmet": ^6.1.5
+    mobx: ^6.4.1
     parcel: ^2.3.2
     react: ^17.0.2
     react-dom: ^17.0.2

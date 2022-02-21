@@ -1,6 +1,6 @@
-import DataItem from './DataItem';
+import Node from './Node';
 
-const node = (label: string, children: readonly DataItem[] = []) => new DataItem(label, children)
+const node = (label: string, children: readonly Node[] = []) => new Node(label, children)
 
 export default function generateDataSample() {
 	return (
