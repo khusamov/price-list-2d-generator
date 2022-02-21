@@ -1,6 +1,6 @@
-import IRenderTree from './IRenderTree';
+import INode from './INode';
 
-export const data: IRenderTree = {
+export const data: INode = {
 	id: 'root',
 	name: 'Услуги',
 	children: [

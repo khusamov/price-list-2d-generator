@@ -1,8 +1,8 @@
-import IRenderTree from './IRenderTree';
+import INode from './INode';
 import TreeItem from '@mui/lab/TreeItem';
 import {TreeItemProps} from '@mui/lab/TreeItem/TreeItem';
 
-export default function renderTree(nodes: IRenderTree) {
+export default function renderTree(nodes: INode) {
 	const {id, name} = nodes;
 	const treeItemProps: TreeItemProps = {
 		nodeId: id,
