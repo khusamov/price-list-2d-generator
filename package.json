@@ -3,7 +3,7 @@
   "packageManager": "yarn@3.1.1",
   "source": "src/index.html",
   "scripts": {
-    "start": "parcel",
+    "start": "parcel --open",
     "build": "parcel build"
   },
   "devDependencies": {
