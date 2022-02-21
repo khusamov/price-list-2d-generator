@@ -6,7 +6,7 @@ type TParent = Node | null
 
 export default class Node implements INode {
 	private _parent: TParent = null
-	private readonly _label: string
+	private _label: string
 	private readonly _children: Node[] = []
 
 	constructor(label: string, children: readonly Node[] = []) {
@@ -25,6 +25,10 @@ export default class Node implements INode {
 
 	public get label(): string {
 		return this._label
+	}
+
+	public set label(label: string) {
+		this._label = label
 	}
 
 	public get parent(): TParent {
