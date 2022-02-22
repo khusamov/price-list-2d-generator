@@ -5,7 +5,7 @@ import TreeView, {TreeViewProps} from '@mui/lab/TreeView'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import renderTree from './renderTree';
-import INode from './INode';
+import INode from './node/INode';
 import getAllNodes from '../../functions/getAllNodes';
 import {InputProps as StandardInputProps} from '@mui/material/Input/Input';
 

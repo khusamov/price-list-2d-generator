@@ -1,4 +1,4 @@
-import INode from './INode';
+import INode from './node/INode';
 import TreeItem from '@mui/lab/TreeItem';
 import {TreeItemProps} from '@mui/lab/TreeItem/TreeItem';
 
