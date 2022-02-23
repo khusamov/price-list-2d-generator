@@ -1,19 +1,23 @@
-import {SyntheticEvent, useState} from 'react';
 import {Helmet} from 'react-helmet';
 import {Box, CssBaseline, GlobalStyles, Grid, Typography} from '@mui/material';
 import generateDataSample from '../../samples/tree-data/generateDataSample';
-import getAllNodes from '../../functions/getAllNodes';
 import ApplicationBar from '../ApplicationBar';
 import TreeEditor from '../TreeEditor';
 import {styles} from './globalStyles';
+import TreeEditorModel from '../TreeEditor/model/TreeEditorModel';
+import INode from '../TreeEditor/model/node/INode';
 
 const siteTitle = 'Генератор прайс-листов'
 
+const treeEditorModel: TreeEditorModel = new TreeEditorModel
+treeEditorModel.data = generateDataSample()
+
 export default function Application() {
-	const data = generateDataSample()
-	const [expandedNodeIds, setExpandedNodeIds] = useState(getAllNodes(data).map(node => node.id))
-	const onNodeToggle = (event: SyntheticEvent, nodeIds: string[]) => {
-		setExpandedNodeIds(nodeIds)
+	const onNodeToggle = (expandedNodes: INode[]) => {
+		treeEditorModel.expandedNodes = expandedNodes
+	}
+	const onNodeSelect = (selectedNode: INode) => {
+		treeEditorModel.selectedNode = selectedNode
 	}
 	return (
 		<Box sx={{height: '100%', flexGrow: 1}}>
@@ -27,9 +31,9 @@ export default function Application() {
 				<Grid item container sx={{flexGrow: 1, overflow: 'auto'}}>
 					<Box sx={{flexGrow: 1}}>
 						<TreeEditor
-							data={data}
-							expanded={expandedNodeIds}
+							model={treeEditorModel}
 							onNodeToggle={onNodeToggle}
+							onNodeSelect={onNodeSelect}
 						/>
 					</Box>
 				</Grid>

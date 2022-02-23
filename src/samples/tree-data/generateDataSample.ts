@@ -1,7 +1,5 @@
 import {Node} from '../../components/TreeEditor';
 
-new Node('')
-
 const node = (label: string, children: readonly Node[] = []) => new Node(label, children)
 
 export default function generateDataSample() {

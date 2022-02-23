@@ -1,70 +1,52 @@
-import {SyntheticEvent, useState} from 'react';
+import {SyntheticEvent} from 'react';
 import {observer} from 'mobx-react-lite';
-import {Box, Button, Grid, TextField, Toolbar} from '@mui/material';
-import TreeView, {TreeViewProps} from '@mui/lab/TreeView'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import ChevronRightIcon from '@mui/icons-material/ChevronRight'
-import renderTree from './renderTree';
-import INode from './node/INode';
-import getAllNodes from '../../functions/getAllNodes';
-import {InputProps as StandardInputProps} from '@mui/material/Input/Input';
+import {Button} from '@mui/material';
+import TreeRenderer, {ITreeRendererProps} from './treeRenderer/TreeRenderer';
+import INode from './model/node/INode';
+import TreeEditorModel from './model/TreeEditorModel';
+import TreeEditorLayout from './TreeEditorLayout';
+import NodeForm from './NodeForm';
 
 interface ITreeEditor {
-	data: INode
-	expanded?: string[]
-	onNodeToggle?: (event: SyntheticEvent, nodeIds: string[]) => void
+	model: TreeEditorModel
+	onNodeToggle?: (expandedNodes: INode[]) => void
+	onNodeSelect?: (selectedNode: INode) => void
 }
 
 export default observer(
-	function TreeEditor({data, expanded, onNodeToggle}: ITreeEditor) {
-		const [selectedNode, setSelectedNode] = useState<INode>()
+	function TreeEditor({model, onNodeToggle, onNodeSelect}: ITreeEditor) {
 
-		const onNodeSelect = (event: SyntheticEvent, nodeIds: string) => {
-			const search = getAllNodes(data).filter(node => node.id === nodeIds)
-			setSelectedNode(search[0])
-		}
+		const {descendantOrSelf: allNodes} = model.data
 
-		const onTextFieldChange: StandardInputProps['onChange'] = event => {
-			if (selectedNode) {
-				selectedNode.label = event.target.value
+		const treeRendererProps: ITreeRendererProps = {
+			sx: {flexGrow: 1},
+			data: model.data,
+			treeViewProps: {
+				selected: model.selectedNode?.id,
+				expanded: model.expandedNodes.map(node => node.id),
+				onNodeToggle: (event: SyntheticEvent, nodeIds: string[]) => {
+					if (onNodeToggle) {
+						const expandedNodes = allNodes.filter(node => nodeIds.includes(node.id))
+						onNodeToggle(expandedNodes)
+					}
+				},
+				onNodeSelect: (event: SyntheticEvent, nodeIds: string) => {
+					if (onNodeSelect) {
+						const selectedNodes = allNodes.filter(node => nodeIds === node.id)
+						onNodeSelect(selectedNodes[0])
+					}
+				}
 			}
 		}
 
-		const treeViewProps: TreeViewProps = {
-			selected: selectedNode?.id,
-			expanded,
-			onNodeToggle,
-			onNodeSelect,
-			defaultCollapseIcon: <ExpandMoreIcon/>,
-			defaultExpandIcon: <ChevronRightIcon/>,
-			sx: {flexGrow: 1}
-		}
-
 		return (
-			<Grid container direction='column' wrap='nowrap' sx={{height: '100%'}}>
-				<Grid item>
-					<Toolbar>
-						<Button variant='contained'>Добавить узел</Button>
-					</Toolbar>
-				</Grid>
-				<Grid item container direction='row' wrap='nowrap' sx={{flexGrow: 1}}>
-					<Grid item sx={{flexGrow: 1}}>
-						<TreeView {...treeViewProps}>
-							{renderTree(data)}
-						</TreeView>
-					</Grid>
-					<Grid item>
-						<Box sx={{width: 400}}>
-							<TextField
-								label='Название узла'
-								value={selectedNode?.label}
-								onChange={onTextFieldChange}
-								sx={{width: '100%'}}
-							/>
-						</Box>
-					</Grid>
-				</Grid>
-			</Grid>
+			<TreeEditorLayout>
+				{{
+					toolbar: <Button variant='contained'>Добавить узел</Button>,
+					view: <TreeRenderer {...treeRendererProps}/>,
+					form: model.selectedNode && <NodeForm node={model.selectedNode}/>
+				}}
+			</TreeEditorLayout>
 		)
 	}
 )

@@ -1,3 +1,3 @@
 export {default} from './TreeEditor'
-export type {default as INode} from './node/INode'
-export {default as Node} from './node/Node'
+export type {default as INode} from './model/node/INode'
+export {default as Node} from './model/node/Node'

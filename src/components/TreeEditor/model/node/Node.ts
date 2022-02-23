@@ -1,8 +1,9 @@
 import {makeObservable, observable, computed} from 'mobx'
-import {INode} from '../index';
+import {INode} from '../../index';
 import constructorParams from './constructorParams';
 import createChildrenProxy from './createChildrenProxy';
 import id from './id';
+import descendantOrSelf from './descendantOrSelf';
 
 export type TKey = string
 export type TLabel = string
@@ -60,6 +61,14 @@ export default class Node implements INode {
 
 	public get children(): Node[] {
 		return createChildrenProxy(this._children, node => node.parent = this)
+	}
+
+	public get isRoot(): boolean {
+		return this.parent === null
+	}
+
+	public get descendantOrSelf(): Node[] {
+		return descendantOrSelf(this)
 	}
 
 	private _makeObservable() {
