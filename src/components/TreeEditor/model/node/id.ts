@@ -4,10 +4,13 @@ const ROOT_ID: TKey = 'root'
 
 /**
  * Алгоритм вычисления уникального идентификатора узла.
+ * Он включается только в случае, если не задан внешний идентификатор узла.
+ * @param node Ссылка на узел.
+ * @param externalId Внешний идентификатор узла.
  */
-export default function id(node: Node, id: TKey | null): TKey {
+export default function id(node: Node, externalId: TKey | null): TKey {
 	return (
-		id ? id : (
+		externalId ? externalId : (
 			node.parent
 				? prefixId(node) + localId(node)
 				: ROOT_ID

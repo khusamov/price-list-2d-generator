@@ -1,9 +1,9 @@
 import {makeObservable, observable, computed} from 'mobx'
 import {INode} from '../../index';
-import constructorParams from './constructorParams';
-import createChildrenProxy from './createChildrenProxy';
 import id from './id';
 import descendantOrSelf from './descendantOrSelf';
+import constructorParams from './constructorParams';
+import createChildrenProxy from './createChildrenProxy';
 
 export type TKey = string
 export type TLabel = string
@@ -72,15 +72,18 @@ export default class Node implements INode {
 	}
 
 	private _makeObservable() {
-		type TPrivates = '_label' | '_parent' | '_children'
+		type TPrivates = '_id' | '_label' | '_parent' | '_children'
 		makeObservable<this, TPrivates>(this, {
+			_id: observable,
 			_parent: observable,
 			_label: observable,
 			_children: observable,
 			id: computed,
 			label: computed,
 			parent: computed,
-			children: computed
+			children: computed,
+			isRoot: computed,
+			descendantOrSelf: computed
 		})
 	}
 }

@@ -1,5 +1,5 @@
 import {ReactNode} from 'react';
-import {Box, Grid, Toolbar} from '@mui/material';
+import {Grid, Toolbar} from '@mui/material';
 
 interface ITreeEditorLayoutProps {
 	children: {
@@ -11,10 +11,6 @@ interface ITreeEditorLayoutProps {
 
 /**
  * Макет редактора древовидных данных.
- * @param toolbar
- * @param view
- * @param form
- * @constructor
  */
 export default function TreeEditorLayout({children: {toolbar, view, form}}: ITreeEditorLayoutProps) {
 	return (
@@ -24,7 +20,7 @@ export default function TreeEditorLayout({children: {toolbar, view, form}}: ITre
 					{toolbar}
 				</Toolbar>
 			</Grid>
-			<Grid item container direction='row' wrap='nowrap' sx={{flexGrow: 1}}>
+			<Grid item container direction='row' wrap='nowrap' sx={{flexGrow: 1}} alignItems='stretch'>
 				<Grid item sx={{flexGrow: 1}}>
 					{view}
 				</Grid>

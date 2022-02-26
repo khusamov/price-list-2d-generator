@@ -11,7 +11,7 @@ interface INodeFormProps {
 export default observer(
 	function NodeForm({node, onLabelTextFieldChange}: INodeFormProps) {
 		return (
-			<Box sx={{width: 400}}>
+			<Box sx={{height: '100%', width: 400, paddingLeft: 2, paddingRight: 2, borderLeft: '1px dashed silver'}}>
 				<TextField
 					label='Название узла'
 					value={node.label}

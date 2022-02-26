@@ -1,11 +1,12 @@
 import {Helmet} from 'react-helmet';
 import {Box, CssBaseline, GlobalStyles, Grid, Typography} from '@mui/material';
 import generateDataSample from '../../samples/tree-data/generateDataSample';
-import ApplicationBar from '../ApplicationBar';
-import TreeEditor from '../TreeEditor';
-import {styles} from './globalStyles';
 import TreeEditorModel from '../TreeEditor/model/TreeEditorModel';
 import INode from '../TreeEditor/model/node/INode';
+import TreeEditor from '../TreeEditor';
+import ApplicationBar from './ApplicationBar';
+import {styles} from './globalStyles';
+import Node from '../TreeEditor/model/node/Node';
 
 const siteTitle = 'Генератор прайс-листов'
 
@@ -19,6 +20,22 @@ export default function Application() {
 	const onNodeSelect = (selectedNode: INode) => {
 		treeEditorModel.selectedNode = selectedNode
 	}
+
+	const isExpandedNode = (verifiable: INode) => treeEditorModel.expandedNodes.find(node => node === verifiable)
+
+	const onTreeEditorAddButtonClick = () => {
+		const parentNode = treeEditorModel.selectedNode ? treeEditorModel.selectedNode : treeEditorModel.data
+		if (parentNode) {
+			if (treeEditorModel.selectedNode && !isExpandedNode(treeEditorModel.selectedNode)) {
+				treeEditorModel.expandedNodes.push(treeEditorModel.selectedNode)
+			}
+			const newNode = new Node('')
+			parentNode.children.push(newNode)
+			treeEditorModel.expandedNodes.push(newNode)
+			treeEditorModel.selectedNode = newNode
+		}
+	}
+
 	return (
 		<Box sx={{height: '100%', flexGrow: 1}}>
 			<CssBaseline/>
@@ -34,6 +51,7 @@ export default function Application() {
 							model={treeEditorModel}
 							onNodeToggle={onNodeToggle}
 							onNodeSelect={onNodeSelect}
+							onAdd={onTreeEditorAddButtonClick}
 						/>
 					</Box>
 				</Grid>
