@@ -36,6 +36,17 @@ export default function Application() {
 		}
 	}
 
+	const onTreeEditorDeleteButtonClick = () => {
+		if (treeEditorModel.selectedNode) {
+			const parentNode = treeEditorModel.selectedNode.parent
+			if (parentNode) {
+				const deletedIndex = parentNode.children.indexOf(treeEditorModel.selectedNode)
+				parentNode.children.splice(deletedIndex, 1)
+				treeEditorModel.selectedNode = null
+			}
+		}
+	}
+
 	return (
 		<Box sx={{height: '100%', flexGrow: 1}}>
 			<CssBaseline/>
@@ -52,6 +63,7 @@ export default function Application() {
 							onNodeToggle={onNodeToggle}
 							onNodeSelect={onNodeSelect}
 							onAdd={onTreeEditorAddButtonClick}
+							onDelete={onTreeEditorDeleteButtonClick}
 						/>
 					</Box>
 				</Grid>

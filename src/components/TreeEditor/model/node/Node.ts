@@ -7,11 +7,10 @@ import createChildrenProxy from './createChildrenProxy';
 
 export type TKey = string
 export type TLabel = string
-type TParent = Node | null
 
 export default class Node implements INode {
 	private _id: TKey | null = null
-	private _parent: TParent = null
+	private _parent: Node | null = null
 	private _label: string
 	private readonly _children: Node[] = []
 
@@ -51,16 +50,16 @@ export default class Node implements INode {
 		this._label = label
 	}
 
-	public get parent(): TParent {
+	public get parent(): Node | null {
 		return this._parent
 	}
 
-	protected set parent(parent: TParent) {
+	public set parent(parent: Node | null) {
 		this._parent = parent
 	}
 
 	public get children(): Node[] {
-		return createChildrenProxy(this._children, node => node.parent = this)
+		return createChildrenProxy(this._children, this)
 	}
 
 	public get isRoot(): boolean {

@@ -13,10 +13,11 @@ interface ITreeEditor {
 	onNodeSelect?: (selectedNode: INode) => void
 	onNodeChange?: (changedNode: INode) => void
 	onAdd?: () => void
+	onDelete?: () => void
 }
 
 export default observer(
-	function TreeEditor({model, onNodeToggle, onNodeSelect, onAdd}: ITreeEditor) {
+	function TreeEditor({model, onNodeToggle, onNodeSelect, onAdd, onDelete}: ITreeEditor) {
 		if (!model.data) return null
 
 		const {descendantOrSelf: allNodes} = model.data
@@ -42,6 +43,7 @@ export default observer(
 		}
 
 		const onAddButtonClick = () => onAdd && onAdd()
+		const onDeleteButtonClick = () => onDelete && onDelete()
 
 		const treeRendererProps: ITreeRendererProps = {
 			sx: {flexGrow: 1},
@@ -58,7 +60,12 @@ export default observer(
 		return (
 			<TreeEditorLayout>
 				{{
-					toolbar: <Button variant='contained' onClick={onAddButtonClick}>Добавить узел</Button>,
+					toolbar: (
+						<>
+							<Button variant='contained' onClick={onAddButtonClick} sx={{mr: 2}}>Добавить</Button>
+							<Button variant='contained' onClick={onDeleteButtonClick}>Удалить</Button>
+						</>
+					),
 					view: <TreeRenderer {...treeRendererProps}/>,
 					form: model.selectedNode && <NodeForm node={model.selectedNode} onLabelTextFieldChange={onLabelTextFieldChange}/>
 				}}
