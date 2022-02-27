@@ -8,7 +8,7 @@ const ROOT_ID: TKey = 'root'
  * @param node Ссылка на узел.
  * @param externalId Внешний идентификатор узла.
  */
-export default function id(node: Node, externalId: TKey | null): TKey {
+export default function id(node: Node, externalId: TKey | undefined): TKey {
 	return (
 		externalId ? externalId : (
 			node.parent

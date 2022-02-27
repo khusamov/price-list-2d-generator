@@ -10,11 +10,15 @@ interface INodeFormProps {
 
 export default observer(
 	function NodeForm({node, onLabelTextFieldChange}: INodeFormProps) {
+		// Внимание! Ссылка на node должна быть внутри компонента NodeForm,
+		// иначе он не будет observer с точки зрения mobx.
+		const value: string = node.label || ''
+
 		return (
 			<Box sx={{height: '100%', width: 400, paddingLeft: 2, paddingRight: 2, borderLeft: '1px dashed silver'}}>
 				<TextField
 					label='Название узла'
-					value={node.label}
+					value={value}
 					onChange={onLabelTextFieldChange}
 					sx={{width: '100%'}}
 				/>

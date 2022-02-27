@@ -29,7 +29,7 @@ export default function Application() {
 			if (treeEditorModel.selectedNode && !isExpandedNode(treeEditorModel.selectedNode)) {
 				treeEditorModel.expandedNodes.push(treeEditorModel.selectedNode)
 			}
-			const newNode = new Node('')
+			const newNode = new Node
 			parentNode.children.push(newNode)
 			treeEditorModel.expandedNodes.push(newNode)
 			treeEditorModel.selectedNode = newNode

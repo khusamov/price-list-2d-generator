@@ -9,24 +9,26 @@ export type TKey = string
 export type TLabel = string
 
 export default class Node implements INode {
-	private _id: TKey | null = null
-	private _parent: Node | null = null
-	private _label: string
+	private _id: TKey | undefined = undefined
+	private _parent: Node | undefined = undefined
+	private _label: string | undefined = undefined
 	private readonly _children: Node[] = []
 
 	/**
 	 * Конструктор узла древовидных данных.
 	 * Возможны вызовы:
+	 *  - new Node
 	 *  - new Node(label)
 	 *  - new Node(id, label)
 	 *  - new Node(label, children)
 	 *  - new Node(id, label, children)
 	 */
+	constructor()
 	constructor(label: TLabel)
 	constructor(id: TKey, label: TLabel)
 	constructor(label: TLabel, children: readonly Node[])
 	constructor(id: TKey, label: TLabel, children: readonly Node[])
-	constructor(idOrLabel: TKey | TLabel, labelOrChildren?: TLabel | readonly Node[], childrenOrUndefined?: readonly Node[]) {
+	constructor(idOrLabel?: TKey | TLabel, labelOrChildren?: TLabel | readonly Node[], childrenOrUndefined?: readonly Node[]) {
 		const {id, label, children} = constructorParams(idOrLabel, labelOrChildren, childrenOrUndefined)
 		if (id) this._id = id
 		this._label = label
@@ -42,19 +44,19 @@ export default class Node implements INode {
 		this._id = id
 	}
 
-	public get label(): string {
+	public get label(): string | undefined {
 		return this._label
 	}
 
-	public set label(label: string) {
+	public set label(label: string | undefined) {
 		this._label = label
 	}
 
-	public get parent(): Node | null {
+	public get parent(): Node | undefined {
 		return this._parent
 	}
 
-	public set parent(parent: Node | null) {
+	public set parent(parent: Node | undefined) {
 		this._parent = parent
 	}
 
