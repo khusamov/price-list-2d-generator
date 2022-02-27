@@ -3,8 +3,8 @@ import {Grid, Toolbar} from '@mui/material';
 
 interface ITreeEditorLayoutProps {
 	children: {
-		toolbar: ReactNode,
-		view: ReactNode,
+		toolbar: ReactNode
+		view: ReactNode
 		form?: ReactNode
 	}
 }
